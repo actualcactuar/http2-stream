@@ -1,0 +1,16 @@
+https://localhost:8080 {
+    encode zstd gzip
+    root * /usr/share/caddy/
+    file_server
+    route /node/* {
+        uri strip_prefix /node
+        reverse_proxy {
+            to node:8443
+            transport http {
+                tls
+                tls_insecure_skip_verify
+            }
+        }
+        
+    }
+}
