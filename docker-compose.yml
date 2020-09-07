@@ -7,11 +7,12 @@ services:
       - ./client/:/usr/share/caddy/
       - ./Caddyfile.dev:/etc/caddy/Caddyfile
     ports:
-      - 8080:8080
+      - 4443:8080
   node:
     container_name: node
     image: node:alpine
-    command: "node /server/server.js"
+    working_dir: /server
+    command: "node server.js"
     expose:
       - 8443
     volumes:
