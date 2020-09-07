@@ -3,8 +3,9 @@ const fs = require('fs');
 
 const app = require('./modules/app')
 
-app.use('/test', (req, res) => {
-    res.end('works')
+app.use('/node/:hash', (req, res) => {
+    const { hash } = req.params;
+    res.end(hash)
 })
 
 const server = http2.createSecureServer({
