@@ -38,7 +38,7 @@ fetch('/node/'.concat(token),
                 return;
             }
 
-            // output.insertAdjacentText("beforeend", value)
+            output.insertAdjacentText("beforeend", value)
 
             reader.read().then(read);
         })
