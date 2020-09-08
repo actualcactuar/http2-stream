@@ -32,11 +32,11 @@ const buildRouteParams = (route, pathname) => {
 
 function app(req, res) {
     const { headers: {
-        ':path': requestPath,
+        ':path': incomingPath,
         ':method': requestMethod,
     } } = req;
 
-
+    const [requestPath, requestQuery] = incomingPath.split('?')
 
     for (const [regex, { route, callback }] of streams.entries()) {
 

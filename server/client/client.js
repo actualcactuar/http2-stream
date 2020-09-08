@@ -1,8 +1,8 @@
 const input = document.getElementById('input');
 const output = document.getElementById('output');
 const close = document.getElementById('close');
-const start = document.getElementById('start');
-const token = (Math.random() * 100).toString(32).replace('.', '-')
+const queryParams = new URLSearchParams(location.search)
+const token = queryParams.has('token') ? queryParams.get('token') : (Math.random() * 100).toString(32).replace('.', '')
 
 const stream = new ReadableStream({
     start(controller) {
@@ -17,17 +17,16 @@ const stream = new ReadableStream({
 }).pipeThrough(new TextEncoderStream());
 
 
-start.onclick = () => fetch('/node/'.concat(token), {
+// Write to server
+fetch('/node/'.concat(token), {
     method: 'POST', body: stream,
     headers: { 'Content-Type': 'application/octet-stream' },
     body: stream,
-}).then(res => {
-    console.log('POST CLOSED')
 })
 
-
+// read from server
 fetch('/node/'.concat(token),
-    { headers: { 'Content-Type': 'application/octet-stream', 'Transfer-Encoding': 'chunked' } }).then(res => {
+    { headers: { 'Content-Type': 'application/octet-stream' } }).then(res => {
 
         const reader = res.body.pipeThrough(new TextDecoderStream()).getReader()
 

@@ -25,6 +25,13 @@ streamer.use('/node/:hash', (stream, headers) => {
             }
         })
 
+        stream.on('close', () => {
+            console.log('stream closed')
+            for (const res of streams.get(hash)) {
+                res.end()
+            }
+        })
+
     }
     console.log({ hash, method })
 })
