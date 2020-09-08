@@ -12,7 +12,7 @@ services:
     container_name: node
     image: node:alpine
     working_dir: /server
-    command: "node server.js"
+    command: ["npm", "run", "docker-dev"]
     expose:
       - 8443
     volumes:

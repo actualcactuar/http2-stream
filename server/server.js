@@ -1,7 +1,7 @@
 const http2 = require('http2');
 const fs = require('fs');
 
-const { app, streamer } = require('./modules/app');
+const { streamer } = require('./modules/app');
 
 const streams = new Map();
 
@@ -39,7 +39,7 @@ streamer.use('/node/:hash', (stream, headers) => {
 const server = http2.createSecureServer({
     key: fs.readFileSync(__dirname + '/localhost-privkey.pem'),
     cert: fs.readFileSync(__dirname + '/localhost-cert.pem'),
-}, app);
+});
 
 server.on('stream', streamer);
 

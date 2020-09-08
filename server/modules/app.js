@@ -1,5 +1,5 @@
 
-const static = require('./static')
+// const static = require('./static')
 
 const routes = new Map();
 const streams = new Map();
@@ -57,16 +57,16 @@ function app(req, res) {
 
     }
 
-    // Serve static files
-    if (requestMethod === 'GET' && /(.js$|.css$|.html$|.ico$)/.test(requestPath)) {
-        static(req, res);
-        return;
-    }
+    // // Serve static files
+    // if (requestMethod === 'GET' && /(.js$|.css$|.html$|.ico$)/.test(requestPath)) {
+    //     static(req, res);
+    //     return;
+    // }
 
-    if (requestMethod === 'GET' && requestPath === '/') {
-        static({ ...req, ...{ headers: { ...req.headers, ':path': '/index.html' } } }, res)
-        return;
-    }
+    // if (requestMethod === 'GET' && requestPath === '/') {
+    //     static({ ...req, ...{ headers: { ...req.headers, ':path': '/index.html' } } }, res)
+    //     return;
+    // }
 
     res.writeHead(403);
     res.end('forbidden')
