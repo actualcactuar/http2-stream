@@ -12,8 +12,11 @@ let sourceBuffer;
 let updated = true;
 let chunks = [];
 
+const codec = 'video/webm;codecs="vp9,opus"'
+
 broadcastSrc.addEventListener("sourceopen", () => {
-    sourceBuffer = broadcastSrc.addSourceBuffer('video/webm;codecs="vp9"');
+    sourceBuffer = broadcastSrc.addSourceBuffer(codec);
+
     sourceBuffer.onupdateend = async () => {
 
         if (chunks.length) {
@@ -35,12 +38,20 @@ broadcastSrc.addEventListener("sourceopen", () => {
 
 const sendMedia = async () => {
 
-    const media = await navigator.mediaDevices.getUserMedia({ video: true });
-    const recorder = new MediaRecorder(media, { mimeType: 'video/webm;codecs="vp9"' });
+    const media = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+
+    // sad hack to fix audio delay on mediastream
+    await new Promise(resolve => {
+        setTimeout(() => {
+            resolve()
+        }, 1000)
+    })
+
+    const recorder = new MediaRecorder(media, { mimeType: codec });
 
     const readable = new ReadableStream({
         start(controller) {
-            recorder.start(100);
+            recorder.start(1000 / 30);
             recorder.ondataavailable = async ({ data }) => {
                 const buffer = await data.arrayBuffer()
                 const uint8 = new Uint8Array(buffer)
