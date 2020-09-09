@@ -1,6 +1,7 @@
 const close = document.getElementById('close');
 const queryParams = new URLSearchParams(location.search)
 const start = document.getElementById('start');
+const mute = document.getElementById('mute')
 const streamview = document.getElementById('streamview');
 const token = queryParams.has('token') ? queryParams.get('token') : (Math.random() * 100).toString(32).replace('.', '')
 
@@ -35,6 +36,9 @@ broadcastSrc.addEventListener("sourceopen", () => {
     };
 });
 
+mute.onclick = () => {
+    streamview.muted = !streamview.muted
+}
 
 const sendMedia = async () => {
 
