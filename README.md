@@ -1,3 +1,6 @@
 # http2-stream
 
-`docker-compose up`
+Stream your audio & video throught nodejs http2 server via media recorder & readable stream.
+```
+npm run dev
+```
