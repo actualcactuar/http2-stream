@@ -5,12 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=$(pwd) nodemon server.js",
-    "docker-dev": "npm i && NODE_ENV=$(pwd) nodemon server.js"
+    "dev": "NODE_ENV=$(pwd) nodemon server.js"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^2.0.4"
-  }
+  "license": "ISC"
 }

@@ -1,7 +1,7 @@
 const http2 = require('http2');
 const fs = require('fs');
 
-const { streamer } = require('./modules/app');
+const { streamer, app } = require('./modules/app');
 
 const streams = new Map();
 
@@ -42,5 +42,6 @@ const server = http2.createSecureServer({
 });
 
 server.on('stream', streamer);
+server.on('request', app);
 
 server.listen(8443);
