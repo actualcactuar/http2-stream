@@ -37,8 +37,8 @@ streamer.use('/node/:hash', (stream, headers) => {
 })
 
 const server = http2.createSecureServer({
-    key: fs.readFileSync(__dirname + '/localhost-privkey.pem'),
-    cert: fs.readFileSync(__dirname + '/localhost-cert.pem'),
+    key: fs.readFileSync(__dirname + '/key.pem'),
+    cert: fs.readFileSync(__dirname + '/cert.pem'),
 });
 
 server.on('stream', streamer);
