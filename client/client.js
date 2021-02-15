@@ -56,7 +56,7 @@ const sendMedia = async () => {
 
     const readable = new ReadableStream({
         start(controller) {
-            recorder.start(100);
+            recorder.start(1000/30);
             recorder.ondataavailable = async ({ data }) => {
                 const buffer = await data.arrayBuffer();
                 const uint8Buffer = new Uint8Array(buffer);
